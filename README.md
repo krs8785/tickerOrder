@@ -2,15 +2,17 @@ ticketOrder
 
 Description:
 
-TicketOrder allows Box Office to create N movies which are played in different theartre hall. When the box office is open (playing atleast one movie) users can start purchasing tickets.
+TicketOrder allows Box Office to create N movies which are played in different theartre hall. When the box office is open (playing atleast one movie) users can start purchasing tickets. The box ffice can be thought of as a database (would require perhaps row level locking)
 
 Assumptions: 
 
 1. Users can only purchase ticket when box office is open. If ticket is not available we discard the order (ie do no queue them). 
 2. The user order are processed by their position in the queue however it does not guarantee gettin tickets if another order is processed quicky since each order is running parallely.
 3. The controller is essentially can be thought of like a REST endpoint where we can dynamically add movies and place orders. The orders are processed are put in a queue and processed 
+4. Once the movie ticket is issued it it the ticket count is decremented from the box office. The method to decrement are synchronized so only one order can be process it
 
 To do:
+
 1. Proper unit testing
 2. Proper commenting/Exception handling/responses
 
