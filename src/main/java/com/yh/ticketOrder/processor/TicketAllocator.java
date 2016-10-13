@@ -30,12 +30,12 @@ public class TicketAllocator  implements Runnable  {
 		if(getBoxOfficeService().isMoviePlaying(getOrder().getMovieName())){
 			if(getBoxOfficeService().isTicketAvailable(getOrder().getMovieName(), getOrder().getTicketRequired())){
 				getBoxOfficeService().decrementTicket( getOrder().getMovieName(), getOrder().getTicketRequired());
-				System.out.println("Ticket issued");
+				System.out.println("Ticket issued [order: "+getOrder().getMovieName()+" "+ getOrder().getTicketRequired()+"]");
 			}else{
-				System.out.println("Ticket Not Available. Sold Out. House Full");
+				System.out.println("Ticket Not Available. Sold Out. House Full [order: "+getOrder().getMovieName()+" "+ getOrder().getTicketRequired()+"]");
 			}
 		}else{
-			System.out.println("Movie not playing at the box Office");
+			System.out.println("Movie not playing at the box Office [order: "+getOrder().getMovieName()+" "+ getOrder().getTicketRequired()+"]");
 		}
 	}
 

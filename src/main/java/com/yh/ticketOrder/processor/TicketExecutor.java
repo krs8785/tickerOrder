@@ -1,5 +1,6 @@
 package com.yh.ticketOrder.processor;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -10,23 +11,19 @@ import com.yh.ticketOrder.model.TicketOrder;
 
 public class TicketExecutor extends Thread{
 
-	public static Queue<TicketOrder> orderList = new ConcurrentLinkedQueue<TicketOrder>();
 	
-	ExecutorService executorService = Executors.newFixedThreadPool(3);
+	static ExecutorService executorService = Executors.newFixedThreadPool(3);
 
-	public void run() {
-		while (true) {
+	public static void processOrders(LinkedList<TicketOrder> orderList) {
+		while (!orderList.isEmpty()) {
 			try {
-				if (!orderList.isEmpty()) {
-					executorService.execute(new TicketAllocator(orderList.remove()));
-				}
+				executorService.execute(new TicketAllocator(orderList.remove()));
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 	    }
+		executorService.shutdown();
 	}
 	
-	public static void addOrderToQueue(TicketOrder ord){
-		orderList.add(ord);
-	}
+	
 }

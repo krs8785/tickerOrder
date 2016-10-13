@@ -8,6 +8,11 @@ Assumptions:
 
 1. Users can only purchase ticket when box office is open. If ticket is not available we discard the order (ie do no queue them). 
 2. The user order are processed by their position in the queue however it does not guarantee gettin tickets if another order is processed quicky since each order is running parallely.
+3. The controller is essentially can be thought of like a REST endpoint where we can dynamically add movies and place orders. The orders are processed are put in a queue and processed 
+
+To do:
+1. Proper unit testing
+2. Proper commenting/Exception handling/responses
 
 Requirements :
 
@@ -56,18 +61,18 @@ b 3
 Result: 
 
 <pre>
-Ticket issued
-Ticket issued
-Ticket issued
-Movie not playing at the box Office
-Ticket issued
-Ticket Not Available. Sold Out. House Full
-Ticket issued
-Ticket issued
-Ticket Not Available. Sold Out. House Full
-Ticket Not Available. Sold Out. House Full
-Ticket Not Available. Sold Out. House Full
-Movie not playing at the box Office
-Ticket issued
-Ticket issued
+Ticket issued [order: w 2]
+Ticket issued [order: q 2]
+Ticket issued [order: q 3]
+Ticket issued [order: w 3]
+Ticket issued [order: q 3]
+Movie not playing at the box Office [order: a 4]
+Ticket Not Available. Sold Out. House Full [order: q 2]
+Ticket issued [order: q 2]
+Ticket issued [order: w 2]
+Ticket Not Available. Sold Out. House Full [order: q 3]
+Ticket Not Available. Sold Out. House Full [order: w 3]
+Movie not playing at the box Office [order: b 3]
+Ticket issued [order: w 3]
+Ticket Not Available. Sold Out. House Full [order: w 1]
 </pre>
